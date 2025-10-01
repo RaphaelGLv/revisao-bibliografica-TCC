@@ -1,21 +1,18 @@
 \section{Trabalhos relacionados}
 
-A gestão da variedade de dados, um desafio inerente a aplicações modernas e sistemas de big data, tem sido objeto de extensiva pesquisa e diversas abordagens arquitetônicas.
-Diversas abordagens foram propostas para lidar com este problema.
+O desafio de gerenciar a heterogeneidade de dados -- um problema fundamental em aplicações contemporâneas como redes sociais -- tem impulsionado a evolução das arquiteturas de persistência. A necessidade de armazenar e processar eficientemente formatos distintos, como textos, imagens e relacionamentos complexos entre entidades, levou ao desenvolvimento de múltiplas estratégias, que serão exploradas neste capítulo.
+
+Este capítulo, portanto, revisa a literatura sobre as principais arquiteturas de persistência de dados, com o objetivo de contextualizar o problema e fundamentar a análise comparativa de desempenho no caso de uso específico de uma rede social de nicho voltado para um contexto cristão de orações, respostas e interações entre os usuários, que será o foco deste trabalho.
 
 \subsection{O fim dos SGBDs generalistas e a ascensão da persistência poliglota}
-Inicialmente, os SGBDs (principalmente os relacionais) eram usados de forma generalista, centralizando todos os dados, independentemente do formato, em um único banco de dados.
-
-Essa abordagem, apesar de extremamente popular entre os anos 80 e 2000, se mostrou ineficiente para lidar com a variedade de dados, como discutido por \textcite{StonebrakerAndCetintemel2005}, que criticaram a ideia dominante chamada por eles de \textit{``one size fits all''} (``um tamanho serve para todos'', tradução livre) como algo que já não fazia mais sentido.
-
-Neste mesmo artigo, os autores argumentam que a solução para o problema da variedade de dados seria o uso de múltiplos SGBDs especializados, cada um lidando com um tipo específico de dado.
+Inicialmente, os SGBDs (principalmente os relacionais) eram usados de forma generalista, centralizando todos os dados, independentemente do formato, em um único banco de dados. Essa abordagem, apesar de extremamente popular entre os anos 80 e 2000, se mostrou ineficiente para lidar com a variedade de dados, como discutido por \textcite{StonebrakerAndCetintemel2005}, que criticaram a ideia dominante chamada por eles de \textit{``one size fits all''} (``um tamanho serve para todos'', tradução livre) como algo que já não fazia mais sentido. Neste mesmo artigo, os autores argumentam que a solução para o problema da variedade de dados seria o uso de múltiplos SGBDs especializados, cada um lidando com um tipo específico de dado.
 
 Essa solução, posteriormente nomeada como persistência poliglota \cite{Leberknight2011}, é amplamente adotada atualmente, com diversas soluções especializadas para diferentes tipos de dados, continuando a usar SGBDs relacionais para dados estruturados, mas integrando bancos de dados NoSQL para dados não estruturados, bancos de dados em grafos para dados relacionais complexos, entre outros.
 \begin{figure}[H]
     \centering
     \caption{Exemplo de arquitetura de persistência poliglota}
-    \includegraphics[width=0.5\linewidth]{images/Fowler2011-polyglot-persistence.png}\\
-    \fonteimagem{Fonte: \textcite{Fowler2011}}
+    \includegraphics[width=0.75\linewidth]{images/Fowler2011-polyglot-persistence.png}\\
+    \fonteimagem{Fonte: Adaptado de \textcite{Fowler2011}}
     \label{fig:Fowler2011-polyglot-persistence}
 \end{figure}
 
@@ -49,7 +46,7 @@ Dessa forma, os bancos de dados multi-modelo buscam oferecer a flexibilidade e a
 \begin{figure}[H]
     \centering
     \caption{Resultados comparativos entre bancos de dados multi-modelo (ArangoDB, OrientDB e Couchbase) e banco de dados especializado (MongoDB)}
-    \includegraphics[width=0.5\linewidth]{images/PluciennikAndZgorzatek2017-multimodel-dbs-comparison.png}\\
+    \includegraphics[width=0.75\linewidth]{images/PluciennikAndZgorzatek2017-multimodel-dbs-comparison.png}\\
     \fonteimagem{Fonte: \textcite{PluciennikAndZgorzatek2017}}
     \label{fig:PluciennikAndZgorzatek2017-multimodel-dbs-comparison}
 \end{figure}
@@ -72,4 +69,8 @@ A partir desses resultados, \textcite{Taipalus2024} conclui que a escolha do SGB
 
 Observando essas mesmas dificuldades e as substanciais diferenças entre bancos de dados, \textcite{ZhangAndLu2021} propuseram uma metodologia de comparação entre bancos de dados dedicada para casos em que há uma grande variedade de dados (\textit{``UniBench''}).
 
-Para isso, os autores definiram um conjunto de dados, métricas e cargas de trabalho para simular do mundo real, assim fornecendo uma base consistente e reprodutível para comparar o desempenho de diferentes SGBDs.    
+Para isso, os autores definiram um conjunto de dados, métricas e cargas de trabalho que simulam uma aplicação realista, com operações que incluem os diversos tipos de dados armazenados, assim fornecendo uma base consistente e reprodutível para comparar o desempenho de diferentes SGBDs.
+
+Diante do exposto, fica evidente que as redes sociais, com sua inerente heterogeneidade de dados, representam um caso de uso ideal para a aplicação e comparação das arquiteturas de sistemas heterogêneos de bancos de dados e de bancos de dados multimodelo. A revisão da literatura indica que, embora ambas as abordagens sejam viáveis, a escolha entre elas envolve um \textit{trade-off} fundamental entre a performance de sistemas especializados e a simplicidade de gestão de sistemas integrados.
+
+Portanto, este trabalho se propõe a analisar empiricamente essas duas abordagens, utilizando como caso de uso uma rede social desenvolvida do zero e aplicada uma metodologia de benchmark, inspirada nos princípios do UniBench, possibilitando que informações cruciais sobre o desempenho, a escalabilidade e a complexidade de implementação sejam obtidas, contribuindo assim para a compreensão das melhores práticas na gestão de dados heterogêneos em aplicações modernas.
