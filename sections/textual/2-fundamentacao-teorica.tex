@@ -21,6 +21,14 @@ Proposto por \textcite{Codd1970}, o modelo relacional é uma abordagem para a or
 
 Diferentes tabelas podem ser relacionadas entre si por meio de chaves primárias, ou estrangeiras, que são atributos que estabelecem vínculos entre os dados de diferentes tabelas. A linguagem padrão para interagir com bancos de dados relacionais é a SQL (Structured Query Language), que permite a definição, manipulação e consulta dos dados de forma declarativa.
 
+Neste modelo, foi desenvolvido também um conceito conhecido pelo acrônimo "ACID", que define um conjunto de propriedades essenciais para garantir a confiabilidade das transações em bancos de dados relacionais:
+\begin{itemize}
+    \item \textbf{Atomicidade:} Garante que uma transação seja tratada como uma única unidade de trabalho, ou seja, todas as operações dentro da transação são concluídas com sucesso ou nenhuma delas é aplicada.
+    \item \textbf{Consistência:} Assegura que uma transação leve o banco de dados de um estado válido para outro estado válido, mantendo a integridade dos dados conforme as regras definidas.
+    \item \textbf{Isolamento:} Garante que as operações de uma transação sejam isoladas das operações de outras transações, evitando interferências e garantindo a integridade dos dados durante a execução simultânea de múltiplas transações.
+    \item \textbf{Durabilidade:} Assegura que, uma vez que uma transação é confirmada (commit), suas alterações sejam permanentes e persistam mesmo em caso de falhas do sistema.
+\end{itemize}
+
 Essa abordagem proporcionou uma maneira estruturada e eficiente de descrever e manipular dados em diversos contextos, com segurança, se tornando o modelo predominante em sistemas de gerenciamento de bancos de dados por mais de cinco décadas.
 
 \subsection{O movimento não somente relacional (NoSQL)}
@@ -28,7 +36,7 @@ Apesar do domínio dos bancos de dados relacionais, com o passar do tempo, surgi
 
 Os SGBDs relacionais foram arquitetados para seguirem uma definição rígida dos seus modelos de dados, justamente para garantir a integridade e consistência dos dados. No entanto, essa rigidez limita estes sistemas de escalarem horizontalmente, ou seja, distribuir a carga de trabalho entre múltiplos servidores, visto que a manutenção das relações entre tabelas torna-se complexa em ambientes distribuídos.
 
-Neste contexto, surgiu o movimento NoSQL (\textit{Not Only SQL}), que, traduzido de forma livre, significa "não somente SQL". Este movimento sugere uma nova abordagem para o gerenciamento de dados, propondo modelos mais flexíveis e escaláveis, que não se restringem ao paradigma relacional tradicional.
+Neste contexto, surgiu o movimento NoSQL (\textit{Not Only SQL}), que, traduzido de forma livre, significa "não somente SQL". Este movimento sugere uma nova abordagem para o gerenciamento de dados, propondo modelos mais flexíveis e escaláveis, que não se restringem ao paradigma relacional tradicional e não seguem de forma estrita o conceito de ACID.
 
 Enquanto essa abordagem não relacional enfraquece alguns princípios do modelo relacional, como a consistência estrita dos dados (mas ainda fornecendo mecanismos que garantem eventual consistência), sua flexibilidade na definição dos modelos de dados proporciona um ambiente propício para escalar horizontalmente, atendendo às demandas que o modelo relacional não consegue suprir eficientemente. Assim, os bancos de dados NoSQL tornaram-se populares em aplicações que exigem alta escalabilidade, disponibilidade e desempenho, especialmente em cenários de \textit{Big Data} e computação em nuvem.
 
