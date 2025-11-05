@@ -20,14 +20,16 @@ A mudança causada pela substancial influência de \textcite{StonebrakerAndCetin
 \subsubsection{Abordagens de persistência poliglota}
 \textcite{Lajam2022} realiza uma profunda análise das diferentes implementações de persistência poliglota, categorizando-as em quatro tipos:
 \begin{itemize}
-    \item \textbf{Coordenada pela aplicação:} A lógica da aplicação é responsável por interagir com múltiplos SGBDs, decidindo qual banco de dados usar para cada operação.
-    \item \textbf{Orientada a serviços: } Cada serviço dentro de uma arquitetura de microsserviços é responsável por gerenciar seu próprio SGBD, comunicando-se com outros serviços conforme necessário.
+    \item \textbf{Coordenado pela aplicação:} A lógica da aplicação é responsável por interagir com múltiplos SGBDs, decidindo qual banco de dados usar para cada operação.
+    \item \textbf{Orientado a serviços: } Cada serviço dentro de uma arquitetura de microsserviços é responsável por gerenciar seu próprio SGBD, comunicando-se com outros serviços conforme necessário.
     \item \textbf{Como um serviço:} Existe uma camada intermediária (\textit{middleware}) que serve de fachada para o acesso aos múltiplos bancos de dados.
     \item \textbf{Bancos de dados multi-modelo:} Utiliza SGBDs que suportam múltiplos modelos de dados, permitindo armazenar diferentes tipos de dados dentro do mesmo sistema, internalizando a lógica e complexidade da persistência poliglota em um único SGBD.
 \end{itemize}
 
-\subsubsection{Desafios da persistência poliglota}
-Anterior a \textcite{Lajam2022}, \textcite{Fowler2011} previu, precisamente, que o uso da persistência poliglota seria uma tendência crescente entre as empresas de maior porte. Mas, apesar de reconhecer os benefícios, \textcite{Fowler2011}, junto com \textcite{Lajam2022}, também destaca os desafios e complexidades adicionais que essa abordagem traz, sendo elas:
+Os dois primeiros tipos ("coordenado pela aplicação" e "orientado a serviços")representam o que a indústria moderna chama de persistência poliglota em sua forma mais comum. Essa prática de usar múltiplos SGBDs especializados em conjunto cria um desafio de engenharia que é um tema clássico na ciência da computação: a gestão de sistemas heterogêneos de bancos de dados \cite{Cardenas1987, Bright1992}.
+
+\subsubsection{Desafios dos sistemas heterogêneos de bancos de dados}
+A literatura sobre sistemas heterogêneos, que remonta há décadas, já identificava os desafios centrais dessa arquitetura \cite{Bright1992}. \textcite{Fowler2011}, ao prever o crescimento da tendência da persistência poliglota, e \textcite{Lajam2022}, ao analisar suas implementações práticas, destacam os mesmos desafios fundamentais:
 \begin{itemize}
     \item \textbf{Complexidade de gerenciamento:} A introdução de múltiplos SGBDs aumenta a complexidade do sistema, exigindo habilidades especializadas para gerenciar e manter cada banco de dados.
     \item \textbf{Integração de dados:} A integração de dados entre diferentes SGBDs pode ser desafiadora, especialmente quando os dados precisam ser combinados ou sincronizados.
