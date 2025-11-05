@@ -1,13 +1,54 @@
 \section{Fundamentação teórica}
+Este capítulo apresenta os conceitos fundamentais necessários para a compreensão das arquiteturas de persistência de dados e suas metodologias de avaliação. Serão definidos os termos-chave, desde os sistemas de gerenciamento de bancos de dados tradicionais até os modelos mais relevantes do movimento NoSQL e as métricas de desempenho utilizadas para avaliá-los.
 
 \subsection{Sistemas de Gerenciamento de Bancos de Dados (SGBDs)}
+Um banco de dados pode ser definido como uma coleção organizada de dados, projetada para facilitar a recuperação e a manipulação eficiente dessas informações. Os Sistemas de Gerenciamento de Bancos de Dados (SGBDs) são softwares que fornecem ferramentas e funcionalidades para criar, gerenciar e interagir com essas coleções de dados.
+
+Segundo \textcite{Korth2019}, um SGBD atua como um mediador entre o usuário (ou a aplicação) e o banco de dados, possibilitando um manuseio eficiente dos dados, garantindo integridade, segurança e consistência das informações armazenadas de forma conveniente, ou seja, ocultando parte da complexidade do armazenamento físico e das operações de manipulação de dados.
+
+Para que um SGBD seja eficiente e conveniente, existem diversas responsabilidades atribuídas a eles, incluindo:
+\begin{itemize}
+    \item \textbf{Definição de dados:} Permitir a criação e modificação da estrutura do banco de dados, incluindo tabelas, índices e relacionamentos.
+    \item \textbf{Manipulação de dados:} Fornecer mecanismos para inserir, atualizar, excluir e consultar dados.
+    \item \textbf{Controle de acesso:} Gerenciar permissões e garantir a segurança dos dados contra acessos não autorizados.
+    \item \textbf{Garantia de integridade:} Assegurar que os dados permaneçam consistentes e válidos conforme as regras definidas.
+    \item \textbf{Recuperação de falhas:} Implementar mecanismos para restaurar os dados em caso de falhas ou perdas.
+    \item \textbf{Desempenho:} Otimizar o acesso e a manipulação dos dados para garantir eficiência nas operações.
+\end{itemize}
 
 \subsection{O Modelo Relacional (SQL)}
+Proposto por \textcite{Codd1970}, o modelo relacional é uma abordagem para a organização e manipulação de dados em bancos de dados, baseada na teoria matemática dos conjuntos. Nesse modelo, os dados são representados em tabelas (ou relações), onde cada tabela é composta por linhas (tuplas) e colunas (atributos).
+
+Diferentes tabelas podem ser relacionadas entre si por meio de chaves primárias, ou estrangeiras, que são atributos que estabelecem vínculos entre os dados de diferentes tabelas. A linguagem padrão para interagir com bancos de dados relacionais é a SQL (Structured Query Language), que permite a definição, manipulação e consulta dos dados de forma declarativa.
+
+Essa abordagem proporcionou uma maneira estruturada e eficiente de descrever e manipular dados em diversos contextos, com segurança, se tornando o modelo predominante em sistemas de gerenciamento de bancos de dados por mais de cinco décadas.
 
 \subsection{O movimento não somente relacional (NoSQL)}
+Apesar do domínio dos bancos de dados relacionais, com o passar do tempo, surgiram novas necessidades e contextos que desafiaram as limitações desse modelo tradicional. Com o advento da web e o avanço do \textit{Big Data}, os dados passaram a ser gerados em volumes massivos, com alta variedade e velocidade, exigindo soluções mais flexíveis e escaláveis.
+
+Os SGBDs relacionais foram arquitetados para seguirem uma definição rígida dos seus modelos de dados, justamente para garantir a integridade e consistência dos dados. No entanto, essa rigidez limita estes sistemas de escalarem horizontalmente, ou seja, distribuir a carga de trabalho entre múltiplos servidores, visto que a manutenção das relações entre tabelas torna-se complexa em ambientes distribuídos.
+
+Neste contexto, surgiu o movimento NoSQL (\textit{Not Only SQL}), que, traduzido de forma livre, significa "não somente SQL". Este movimento sugere uma nova abordagem para o gerenciamento de dados, propondo modelos mais flexíveis e escaláveis, que não se restringem ao paradigma relacional tradicional.
+
+Enquanto essa abordagem não relacional enfraquece alguns princípios do modelo relacional, como a consistência estrita dos dados (mas ainda fornecendo mecanismos que garantem eventual consistência), sua flexibilidade na definição dos modelos de dados proporciona um ambiente propício para escalar horizontalmente, atendendo às demandas que o modelo relacional não consegue suprir eficientemente. Assim, os bancos de dados NoSQL tornaram-se populares em aplicações que exigem alta escalabilidade, disponibilidade e desempenho, especialmente em cenários de \textit{Big Data} e computação em nuvem.
 
 \subsubsection{Principais Modelos de Dados NoSQL}
+Dentro do movimento NoSQL, existem diversos modelos de dados que atendem a diferentes necessidades e casos de uso. Os principais modelos incluem:
+\begin{itemize}
+    \item \textbf{Bancos de Dados de Documentos:} Armazenam dados em documentos, geralmente no formato JSON (JavaScript Object Notation) ou BSON (Binary JSON), permitindo uma estrutura flexível e hierárquica. São ideais para aplicações que lidam com dados semi-estruturados, como catálogos de produtos ou perfis de usuários, que podem variar em estrutura e conteúdo.
+    \item \textbf{Bancos de Dados de Chave-Valor:} Armazenam dados como pares chave-valor, ou seja, cada chave é única, comumente representada por uma string, e mapeia para um valor que pode ser um objeto complexo. Esse modelo é altamente eficiente para operações simples de leitura e escrita, sendo amplamente utilizado em situações que uma mesma consulta é realizada repetidamente, como para armazenar sessões de usuários em aplicações web.
+    \item \textbf{Bancos de Dados em Grafos:} Focados em representar e consultar relacionamentos complexos entre entidades, utilizando estruturas de grafos. São ideais para aplicações que envolvem redes sociais, recomendações e análise de conexões, onde as relações entre os dados são tão importantes quanto os próprios dados.
+    \item \textbf{Bancos de Dados em Colunas:} Armazenam dados em colunas em vez de linhas, otimizando consultas analíticas em grandes volumes de dados. São frequentemente utilizados em ambientes de \textit{data warehousing} e análise de grandes conjuntos de dados (\textit{Big Data}).
+\end{itemize}
 
 \subsection{Métricas de Desempenho de Sistemas}
-
+Como parte crucial da engenharia de software, a avaliação de métricas de desempenho de sistemas é essencial para quantificar a eficiência, a eficácia e a evolução de sistemas de software ao longo do tempo. Para isso, diversas métricas podem ser utilizadas, dependendo do contexto e dos objetivos da avaliação. Algumas das métricas mais comuns incluem:
+\begin{itemize}
+    \item \textbf{Latência (\textit{Latency}):} Também conhecida como tempo de resposta, a latência é o tempo total (normalmente medido em milissegundos) necessário para que uma única operação seja concluída, do ponto de vista do solicitante. Em sistemas de banco de dados, por exemplo, a latência pode ser medida desde o momento em que uma consulta é enviada até o momento em que os resultados são recebidos. Baixa latência demonstra um sistema eficiente, enquanto alta latência pode indicar gargalos e uma pior experiência de usuário.
+    \item \textbf{Throughput (Vazão):} Refere-se à quantidade de operações ou transações que um sistema pode processar em um determinado período de tempo, geralmente medido em consultas por segundo (QPS) ou transações por segundo (TPS). Um alto throughput indica que o sistema é capaz de lidar com uma carga significativa de trabalho, visto que, quanto mais consultas um sistema recebe, maior se torna o tempo para processar cada uma, o throughput se torna uma métrica crucial para avaliar a escalabilidade e a capacidade de processamento do sistema.
+    \item \textbf{Utilização de Recursos:} Mede o consumo de recursos do sistema, como CPU, memória, largura de banda de rede e I/O de disco. A utilização eficiente dos recursos é fundamental para garantir que o sistema opere dentro dos limites aceitáveis, evitando sobrecargas que possam levar a degradação do desempenho.
+\end{itemize}
 \subsection{Síntese do Capítulo}
+Este capítulo apresentou os conceitos teóricos essenciais que fundamentam este trabalho. Foram definidos o que são os SGBDs e seus principais modelos, considerando seus propósitos e responsabilidades. Dentre os modelos de SGBDs, foi destacado o modelo NoSQL, que surgiu como uma resposta às limitações dos bancos de dados relacionais tradicionais em determinados contextos, explanando as diferentes abordagens dentro do movimento NoSQL. Por fim, foram discutidas as principais métricas de desempenho utilizadas na avaliação de sistemas de banco de dados, com ênfase em latência e throughput, que serão empregadas na análise comparativa dos sistemas estudados neste trabalho.
+
+Com esta base conceitual estabelecida, o próximo capítulo se propõe a analisar as aplicações práticas dessas arquiteturas de persistência de dados, no passado e no presente contexto do gerenciamento de dados heterogêneos, dissertando sobre as abordagens adotadas e suas implicações.
