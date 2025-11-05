@@ -5,7 +5,7 @@ Como estabelecido no capítulo anterior, este capítulo revisa as principais abo
 \subsection{O fim dos SGBDs generalistas e a ascensão da persistência poliglota}
 Inicialmente, os SGBDs (principalmente os relacionais) eram usados de forma generalista, centralizando todos os dados, independentemente do formato, em um único banco de dados relacional. Essa abordagem, apesar de extremamente popular entre os anos 80 e 2000, se mostrou ineficiente para lidar com a variedade de dados, como discutido por \textcite{StonebrakerAndCetintemel2005}, que criticaram a ideia dominante chamada por eles de \textit{``one size fits all''} (``um tamanho serve para todos'', tradução livre) como algo que já não fazia mais sentido. Visto que, a tentativa de acomodar todos os tipos de dados em um único modelo reduzia drasticamente a eficiência antes oferecida pelos SGBDs generalistas, tornando-os incapazes de competir com abordagens especializadas. Neste mesmo artigo, os autores argumentam que a solução para o problema da variedade de dados seria o uso de múltiplos SGBDs especializados, cada um lidando com um tipo específico de dado, gerando um ganho de eficiência e performance que compensaria a complexidade adicional.
 
-Essa solução, posteriormente nomeada como persistência poliglota \cite{Leberknight2011}, é amplamente adotada atualmente, com diversas soluções especializadas para diferentes tipos de dados, continuando a usar SGBDs relacionais para dados estruturados, mas integrando bancos de dados NoSQL para dados não estruturados, bancos de dados em grafos para dados relacionais complexos, entre outros.
+Essa solução, posteriormente nomeada como persistência poliglota \cite{Leberknight2011}, é amplamente adotada atualmente, com diversas soluções especializadas para diferentes tipos de dados, continuando a usar SGBD-Rs para dados estruturados, mas integrando bancos de dados NoSQL para dados não estruturados, bancos de dados em grafos para dados relacionais complexos, entre outros.
 \begin{figure}[H]
     \centering
     \caption{Exemplo de arquitetura de persistência poliglota}
@@ -22,7 +22,7 @@ A mudança causada pela substancial influência de \textcite{StonebrakerAndCetin
 \begin{itemize}
     \item \textbf{Coordenada pela aplicação:} A lógica da aplicação é responsável por interagir com múltiplos SGBDs, decidindo qual banco de dados usar para cada operação.
     \item \textbf{Orientada a serviços: } Cada serviço dentro de uma arquitetura de microsserviços é responsável por gerenciar seu próprio SGBD, comunicando-se com outros serviços conforme necessário.
-    \item \textbf{Como um serviço:} Existe uma camada intermediária (middleware) que serve de fachada para o acesso aos múltiplos bancos de dados.
+    \item \textbf{Como um serviço:} Existe uma camada intermediária (\textit{middleware}) que serve de fachada para o acesso aos múltiplos bancos de dados.
     \item \textbf{Bancos de dados multi-modelo:} Utiliza SGBDs que suportam múltiplos modelos de dados, permitindo armazenar diferentes tipos de dados dentro do mesmo sistema, internalizando a lógica e complexidade da persistência poliglota em um único SGBD.
 \end{itemize}
 
